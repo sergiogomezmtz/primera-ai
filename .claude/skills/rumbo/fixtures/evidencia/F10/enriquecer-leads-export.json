@@ -1,0 +1,19 @@
+{
+  "name": "Enriquecer leads (FICTICIO — contiene una llave FALSA a propósito)",
+  "nodes": [
+    {"name": "CRM Trigger", "type": "n8n-nodes-base.hubspotTrigger"},
+    {"name": "IF tiene dominio", "type": "n8n-nodes-base.if"},
+    {"name": "Anthropic Chat Model", "type": "@n8n/n8n-nodes-langchain.lmchatanthropic",
+     "parameters": {"model": "claude-haiku-5-5", "options": {}},
+     "credentials": {"anthropicApi": {"id": "1", "name": "Anthropic (pegada a mano)"}}},
+    {"name": "Inferir industria", "type": "@n8n/n8n-nodes-langchain.chainllm",
+     "parameters": {"prompt": "Dominio: {{$json.domain}}. Empresa: {{$json.company}}. Elige UNA industria de esta lista de 20 y estima tamaño. Devuelve JSON {industria, tamano, confianza}."}},
+    {"name": "HTTP Request (respaldo)", "type": "n8n-nodes-base.httpRequest",
+     "parameters": {"url": "https://api.anthropic.com/v1/messages",
+                    "headerParameters": {"parameters": [{"name": "x-api-key", "value": "sk-ant-FAKE-0000-NO-ES-UNA-LLAVE-REAL-0000"}]}}},
+    {"name": "IF confianza baja", "type": "n8n-nodes-base.if"},
+    {"name": "HubSpot", "type": "n8n-nodes-base.hubspot", "parameters": {"operation": "update"}}
+  ],
+  "active": true,
+  "versionId": "ficticio-f10"
+}

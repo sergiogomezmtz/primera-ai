@@ -1,0 +1,13 @@
+{
+  "name": "Calificar leads (FICTICIO)",
+  "nodes": [
+    {"name": "Webhook formulario", "type": "n8n-nodes-base.webhook"},
+    {"name": "IF dominio gratuito", "type": "n8n-nodes-base.if", "parameters": {"note": "descarta gmail/hotmail/yahoo"}},
+    {"name": "Calificar 1-5", "type": "@n8n/n8n-nodes-langchain.chainllm"},
+    {"name": "Structured Output Parser", "type": "@n8n/n8n-nodes-langchain.outputparserstructured"},
+    {"name": "IF score 5", "type": "n8n-nodes-base.if"},
+    {"name": "HubSpot", "type": "n8n-nodes-base.hubspot", "parameters": {"operation": "upsert"}}
+  ],
+  "active": true,
+  "versionId": "ficticio-f04"
+}

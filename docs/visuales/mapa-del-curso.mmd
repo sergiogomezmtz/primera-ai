@@ -1,0 +1,22 @@
+flowchart TD
+    start["Entrada: ¿qué evidencia traes?"] --> choose{"Elige tu ruta"}
+    choose --> route1["Ruta 1 · Ya tengo algo construido\nFalla, cuello de botella o decisión difícil"]
+    choose --> route2["Ruta 2 · Quiero descubrir qué agentizar\nProceso, decisión y salida"]
+    choose --> route3["Ruta 3 · Camino dorado opcional\nCalibra y vuelve a Ruta 2"]
+    route1 --> common["Checkpoint común\nUna decisión · tres casos ancla · fallback"]
+    route2 --> common
+    route3 --> common
+    common --> s2["S2 · Contrato y primera medición"]
+    s2 --> s3["S3 · Diagnóstico y mejora medida"]
+    s3 --> s4["S4 · Gobernanza y handoff"]
+    s4 --> done["Núcleo · sistema explicable y operable"]
+    done -. extensión opcional .-> s5["S5 · Comparar agente único / Nest / Swarm"]
+
+    classDef dark fill:#172033,color:#FFFFFF,stroke:#172033,stroke-width:2px;
+    classDef route fill:#E9E7FF,color:#172033,stroke:#5B5BD6,stroke-width:1.5px;
+    classDef session fill:#FFF1EA,color:#172033,stroke:#E77B52,stroke-width:1.5px;
+    classDef decision fill:#EAF7F2,color:#172033,stroke:#3B9B78,stroke-width:1.5px;
+    class start,done dark;
+    class route1,route2,route3,s5 route;
+    class common,s2,s3,s4 session;
+    class choose decision;

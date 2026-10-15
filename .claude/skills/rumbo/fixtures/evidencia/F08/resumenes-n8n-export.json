@@ -1,0 +1,11 @@
+{
+  "name": "Resumir reuniones a Slack (FICTICIO)",
+  "nodes": [
+    {"name": "Calendar Trigger", "type": "n8n-nodes-base.googleCalendarTrigger"},
+    {"name": "IF hay transcripcion", "type": "n8n-nodes-base.if"},
+    {"name": "Resumir", "type": "@n8n/n8n-nodes-langchain.chainllm", "parameters": {"prompt": "Resume esta reunión en 5 bullets y lista los acuerdos con responsable y fecha. Transcripción: {{$json.transcript}}"}},
+    {"name": "Slack", "type": "n8n-nodes-base.slack", "parameters": {"channel": "#producto"}}
+  ],
+  "active": true,
+  "versionId": "ficticio-f08"
+}

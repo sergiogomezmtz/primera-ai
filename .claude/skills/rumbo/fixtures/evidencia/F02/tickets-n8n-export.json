@@ -1,0 +1,13 @@
+{
+  "name": "Clasificar tickets Zendesk (FICTICIO)",
+  "nodes": [
+    {"name": "Zendesk Trigger", "type": "n8n-nodes-base.zendeskTrigger", "parameters": {"event": "ticket.created"}},
+    {"name": "IF dominio interno", "type": "n8n-nodes-base.if", "parameters": {"conditions": {"string": [{"value1": "={{$json.requester_email}}", "operation": "endsWith", "value2": "@ejemplo-ficticio.com"}]}}},
+    {"name": "Text Classifier", "type": "@n8n/n8n-nodes-langchain.text-classifier", "parameters": {"categories": ["acceso", "facturacion", "bug", "solicitud", "cancelacion", "otro"]}},
+    {"name": "Asignar cola", "type": "n8n-nodes-base.switch", "parameters": {"rules": "por categoria"}},
+    {"name": "Zendesk Update", "type": "n8n-nodes-base.zendesk", "parameters": {"operation": "update"}}
+  ],
+  "connections": {},
+  "active": true,
+  "versionId": "ficticio-f02"
+}
